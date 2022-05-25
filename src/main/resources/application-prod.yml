@@ -1,4 +1,4 @@
-
+# 需要发送的topic
 kafka-topic:
   zipkin: zipkin-raven
 
@@ -9,8 +9,8 @@ spring:
   application:
     name: zipkin-collector-pretender
   kafka:
-    # 集群地址
-    bootstrap-servers: 10.0.16.196:18108
+    # 集群地址, 修改为需要发送的 kafka 集群
+    bootstrap-servers: 127.0.0.1:9092
 
     listener:
       #设置是否批量消费，默认 single（单条），batch（批量）
