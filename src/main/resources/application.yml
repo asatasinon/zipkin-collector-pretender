@@ -1,16 +1,12 @@
-server:
-  port: 9411
 
 kafka-topic:
   zipkin: zipkin-raven
 
 
 spring:
-  application:
-    name: zipkin-collector-pretender
   kafka:
     # 集群地址
-    bootstrap-servers: 10.0.16.196:18108
+    bootstrap-servers: ${kafkaBrokerServers}
 
     listener:
       #设置是否批量消费，默认 single（单条），batch（批量）
@@ -79,3 +75,5 @@ spring:
             ms: 120000
 #        interceptor:
 #          classes: com.raven.zipkincollector.interceptor.KafkaConsumerInterceptor
+
+

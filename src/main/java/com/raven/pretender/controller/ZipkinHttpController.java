@@ -56,7 +56,7 @@ public class ZipkinHttpController {
             }
 
             //发送kafka
-            if (!StringUtils.isEmpty(encode)) {
+            if (!StringUtils.isEmpty(msg)) {
                 kafkaTemplate.send(zipkinKafkaConfig.getZipkinTopic(), msg).get(DEFAULT_TIME_OUT, TimeUnit.SECONDS);
             }
 

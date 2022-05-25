@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.raven</groupId>
     <artifactId>zipkin-collector-pretender</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>zipkin-collector-pretender</name>
     <description>zipkin-collector-pretender</description>
 
@@ -15,6 +15,7 @@
         <spring-boot.version>2.3.8.RELEASE</spring-boot.version>
         <kafka.version>2.8.1</kafka.version>
         <spring-kafka.version>2.8.2</spring-kafka.version>
+        <nacos.version>2.2.3.RELEASE</nacos.version>
     </properties>
 
     <dependencies>
@@ -56,6 +57,11 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -82,6 +88,12 @@
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
                 <version>${spring-kafka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
