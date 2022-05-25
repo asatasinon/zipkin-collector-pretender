@@ -13,10 +13,10 @@ import java.util.zip.GZIPOutputStream;
  */
 public class GzipUtils {
 
-    private static final String UTF_8 = "UTF-8";
+    private static final String DEFAULT_CHARSET_NAME = "UTF-8";
 
     public static byte[] compressToByte(String str) {
-        return compressToByte(str, UTF_8);
+        return compressToByte(str, DEFAULT_CHARSET_NAME);
     }
 
     public static byte[] compressToByte(String str, String encoding) {
@@ -36,7 +36,7 @@ public class GzipUtils {
     }
 
     public static String uncompressToString(byte[] b) {
-        return uncompressToString(b, UTF_8);
+        return uncompressToString(b, DEFAULT_CHARSET_NAME);
     }
 
     public static String uncompressToString(byte[] b, String encoding) {

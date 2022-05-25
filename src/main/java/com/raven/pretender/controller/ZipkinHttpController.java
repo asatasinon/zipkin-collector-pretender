@@ -41,18 +41,25 @@ public class ZipkinHttpController {
     @PostMapping("/api/v2/spans")
     public String uploadSpansJson(@RequestBody byte[] param, HttpServletRequest req) {
         try {
-            String encode = req.getHeader(CONTENT_ENCODING);
             String msg = "";
 
-            if (StringUtils.isEmpty(encode)) {
-                msg = new String(param, 0, param.length, DEFAULT_CHARSET_NAME);
-            }
+            //获取数据压缩方式
+            String encode = req.getHeader(CONTENT_ENCODING);
 
+            //gzip压缩
             if (COMPRESS_GZIP.equals(encode)) {
                 msg = GzipUtils.uncompressToString(param);
             }
+            //无压缩
+            else if (StringUtils.isEmpty(encode)) {
+                msg = new String(param, DEFAULT_CHARSET_NAME);
+            }
 
-            kafkaTemplate.send(zipkinKafkaConfig.getZipkinTopic(), msg).get(DEFAULT_TIME_OUT, TimeUnit.SECONDS);
+            //发送kafka
+            if (!StringUtils.isEmpty(encode)) {
+                kafkaTemplate.send(zipkinKafkaConfig.getZipkinTopic(), msg).get(DEFAULT_TIME_OUT, TimeUnit.SECONDS);
+            }
+
         } catch (Exception e) {
             log.error("ZipkinHttpController.uploadSpansJson error, cause by: {}", e);
         }

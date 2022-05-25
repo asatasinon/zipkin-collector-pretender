@@ -44,12 +44,24 @@ public class HexStringUtils {
         return digit;
     }
 
-    public static String toHex(String str) {
+    public static String strToHexStr(String str) {
         return new String(encodeHex(str.getBytes()));
     }
 
-    public static String fromHex(String hex) {
+
+    public static String bytesToHexStr(byte[] bytes) {
+        return new String(encodeHex(bytes));
+    }
+
+
+    public static String hexStrToStr(String hex) {
         return new String(decodeHex(hex.toCharArray()));
     }
+
+    public static String hexCharsToStr(char[] hex) {
+        return new String(decodeHex(hex));
+    }
+
+
 
 }

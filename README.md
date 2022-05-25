@@ -1,5 +1,5 @@
 # zipkin-collector-pretender
-> 伪装成 zipkin 的 collector, 解压(gzip解压)数据 并 转换成json格式, 发送至指定的 kafka.topic
+> 伪装成 zipkin 的 collector, 解压(gzip解压)数据, 发送至指定的 kafka.topic
 
 ## 修改配置
 
