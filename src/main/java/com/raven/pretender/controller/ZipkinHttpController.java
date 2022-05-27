@@ -51,12 +51,12 @@ public class ZipkinHttpController {
                 msg = GzipUtils.uncompressToString(param);
             }
             //无压缩
-            else if (StringUtils.isEmpty(encode)) {
+            else if (!StringUtils.hasLength(encode)) {
                 msg = new String(param, DEFAULT_CHARSET_NAME);
             }
 
             //发送kafka
-            if (!StringUtils.isEmpty(msg)) {
+            if (StringUtils.hasLength(msg)) {
                 kafkaTemplate.send(zipkinKafkaConfig.getZipkinTopic(), msg).get(DEFAULT_TIME_OUT, TimeUnit.SECONDS);
             }
 
