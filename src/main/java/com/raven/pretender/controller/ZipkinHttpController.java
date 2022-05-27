@@ -62,6 +62,7 @@ public class ZipkinHttpController {
 
         } catch (Exception e) {
             log.error("ZipkinHttpController.uploadSpansJson error, cause by: {}", e);
+            return e.getMessage();
         }
 
         return "success";
