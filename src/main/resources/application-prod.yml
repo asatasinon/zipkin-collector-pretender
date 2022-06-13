@@ -45,9 +45,9 @@ spring:
           block:
             # KafkaProducer.send() 和 partitionsFor() 方法的最长阻塞时间 单位 ms
             ms: 6000
-    #        partitioner:
-    #          #指定自定义分区器
-    #          class: com.raven.zipkincollector.partitioner.ZipkinPartitioner
+            partitioner:
+              #指定自定义分区器
+              class: com.raven.pretender.partitioner.KeyModPartitioner
 
     # 消费者配置
     consumer:
