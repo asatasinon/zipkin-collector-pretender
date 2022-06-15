@@ -1,12 +1,10 @@
 package com.raven.pretender.partitioner;
 
 import org.apache.kafka.clients.producer.Partitioner;
+import org.apache.kafka.clients.producer.internals.StickyPartitionCache;
 import org.apache.kafka.common.Cluster;
-import org.apache.kafka.common.PartitionInfo;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * @author: raven
@@ -15,7 +13,7 @@ import java.util.Random;
  */
 public class KeyModPartitioner implements Partitioner {
 
-    private static final Random RANDOM_INT = new Random();
+    private final StickyPartitionCache stickyPartitionCache = new StickyPartitionCache();
 
     public KeyModPartitioner() {
     }
@@ -23,7 +21,7 @@ public class KeyModPartitioner implements Partitioner {
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
         int numPartitions = cluster.partitionsForTopic(topic).size();
-        return key == null ? RANDOM_INT.nextInt(numPartitions) : Math.abs(key.hashCode()) % numPartitions;
+        return key == null ?  this.stickyPartitionCache.partition(topic, cluster) : Math.abs(key.hashCode()) % numPartitions;
     }
 
     @Override
@@ -34,5 +32,11 @@ public class KeyModPartitioner implements Partitioner {
     @Override
     public void configure(Map<String, ?> map) {
 
+    }
+
+
+    @Override
+    public void onNewBatch(String topic, Cluster cluster, int prevPartition) {
+        this.stickyPartitionCache.nextPartition(topic, cluster, prevPartition);
     }
 }
