@@ -22,3 +22,12 @@ spring:
 kafka-topic:
   zipkin: zipkin-raven
 ```
+
+### 指定jaeger-collector地址
+
+```yaml
+# 需要转发到对应的jaeger-collector地址
+target:
+  url: http://10.0.16.196:9411/api/v2/spans
+
+```
